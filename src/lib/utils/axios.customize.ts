@@ -1,13 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000/api',
+  baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:3000/api",
   timeout: 10000,
 });
 
 instance.interceptors.request.use(
   function (config) {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem("access_token");
 
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -17,7 +17,7 @@ instance.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  },
 );
 instance.interceptors.response.use(
   (response) => {
@@ -35,9 +35,9 @@ instance.interceptors.response.use(
 
     return Promise.reject({
       success: false,
-      message: error.message || 'Lỗi kết nối Server',
+      message: error.message || "Lỗi kết nối Server",
       errors: null,
     });
-  }
+  },
 );
 export default instance;
