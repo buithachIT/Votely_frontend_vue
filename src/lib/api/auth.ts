@@ -1,6 +1,6 @@
 import axios from '@/lib/utils/axios.customize';
-import type { LoginInput } from '@/schemas/LoginFormSchema';
-import type { RegisterInput } from '@/schemas/RegisterFormSchema';
+import type { LoginInput } from '@/views/auth/LoginForm/LoginFormSchema';
+import type { RegisterInput } from '@/views/auth/RegisterForm/RegisterFormSchema';
 import type { IBackendRes, ILoginResponse, IUser } from '@/types/global';
 
 export const loginAPI = (
@@ -18,4 +18,9 @@ export const fetchProfileAPI = (): Promise<IBackendRes<IUser>> => {
 };
 export const logoutAPI = (): Promise<IBackendRes<null>> => {
   return axios.post('/logout');
+};
+export const refreshTokenAPI = (): Promise<
+  IBackendRes<{ accessToken: string }>
+> => {
+  return axios.post('/refresh');
 };
